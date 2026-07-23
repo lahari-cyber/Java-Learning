@@ -1,0 +1,464 @@
+1.PRIMARY KEY
+Syntax
+CREATE TABLE Student (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+     
+Insert Example
+CREATE TABLE Student (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+INSERT INTO Student VALUES (101, 'Lahari');
+INSERT INTO Student VALUES (102, 'Riya');
+Error Example
+CREATE TABLE Student (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+INSERT INTO Student VALUES (101, 'Lahari');
+INSERT INTO Student VALUES (102, 'Riya');
+INSERT INTO Student VALUES (101, 'Ram');
+Error
+ERROR 1062: Duplicate entry '101' for key 'PRIMARY'
+Solution
+CREATE TABLE Student (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+INSERT INTO Student VALUES (101, 'Lahari');
+INSERT INTO Student VALUES (102, 'Riya');
+INSERT INTO Student VALUES (103, 'Ram');
+
+
+2. DEFAULT
+Syntax
+CREATE TABLE Employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(30),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+Insert
+CREATE TABLE Employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(30),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+INSERT INTO Employee(id, name)
+VALUES(1,'Lahari');
+Output
+1 Lahari Hyderabad
+Other than default
+CREATE TABLE Employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(30),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+INSERT INTO Employee(id, name)
+VALUES(1,'Lahari');
+VALUES(2,'Anu','Vijayawada');
+
+
+
+3. UNIQUE
+Syntax
+CREATE TABLE Users (
+    id INT PRIMARY KEY,
+    email VARCHAR(50) UNIQUE
+);
+Insert
+CREATE TABLE Users (
+    id INT PRIMARY KEY,
+    email VARCHAR(50) UNIQUE
+);
+INSERT INTO Users VALUES(1,'abc@gmail.com');
+INSERT INTO Users VALUES(2,'xyz@gmail.com');
+Error Example
+CREATE TABLE Users (
+    id INT PRIMARY KEY,
+    email VARCHAR(50) UNIQUE
+);
+INSERT INTO Users VALUES(1,'abc@gmail.com');
+INSERT INTO Users VALUES(2,'xyz@gmail.com');
+INSERT INTO Users VALUES(3,'abc@gmail.com');
+Error
+ERROR 1062:Duplicate entry 'abc@gmail.com'
+Solution
+CREATE TABLE Users (
+    id INT PRIMARY KEY,
+    email VARCHAR(50) UNIQUE
+);
+INSERT INTO Users VALUES(1,'abc@gmail.com');
+INSERT INTO Users VALUES(2,'xyz@gmail.com');
+INSERT INTO Users VALUES(3,'new@gmail.com');
+
+4. CHECK
+Syntax
+CREATE TABLE Student (
+    id INT,
+    age INT CHECK(age>=18)
+);
+Insert
+CREATE TABLE Student (
+    id INT,
+    age INT CHECK(age>=18)
+);
+INSERT INTO Student VALUES(1,20);
+Error Example
+CREATE TABLE Student (
+    id INT,
+    age INT CHECK(age>=18)
+);
+INSERT INTO Student VALUES(1,20);
+INSERT INTO Student VALUES(2,15);
+Error
+Check constraint violated
+Solution
+CREATE TABLE Student (
+    id INT,
+    age INT CHECK(age>=18)
+);
+INSERT INTO Student VALUES(1,20);
+INSERT INTO Student VALUES(2,18);
+
+5. NOT NULL
+Syntax
+CREATE TABLE Student (
+    id INT,
+    name VARCHAR(30) NOT NULL
+);
+Insert
+CREATE TABLE Student (
+    id INT,
+    name VARCHAR(30) NOT NULL
+);
+INSERT INTO Student VALUES(1,'Lahari');
+Error Example
+CREATE TABLE Student (
+    id INT,
+    name VARCHAR(30) NOT NULL
+);
+INSERT INTO Student VALUES(1,'Lahari');
+INSERT INTO Student(id)VALUES(2);
+Error
+Column 'name' cannot be null
+Solution
+CREATE TABLE Student (
+    id INT,
+    name VARCHAR(30) NOT NULL
+);
+INSERT INTO Student VALUES(1,'Lahari');
+INSERT INTO Student VALUES(2,'Riya');
+
+7. AUTO_INCREMENT
+Syntax
+CREATE TABLE Employee(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30)
+);
+Insert
+CREATE TABLE Employee(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30)
+);
+INSERT INTO Employee(name)
+VALUES('Lahari');
+INSERT INTO Employee(name)
+VALUES('Anu');
+Output
+1 Lahari
+2 Anu
+
+
+
+
+
+
+
+
+
+
+
+8. VOTERS LIST (Simple Example)
+Create Table
+CREATE TABLE Voters(
+    voterid INT PRIMARY KEY,
+    name VARCHAR(30),
+    age INT CHECK(age>=18),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+Insert
+CREATE TABLE Voters(
+    voterid INT PRIMARY KEY,
+    name VARCHAR(30),
+    age INT CHECK(age>=18),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+INSERT INTO Voters
+VALUES(101,'Lahari',20,'Guntur');
+INSERT INTO Voters(voterid,name,age)
+VALUES(102,'Anu',22);
+Display
+SELECT * FROM Voters;
+Error (Duplicate Primary Key)
+CREATE TABLE Voters(
+    voterid INT PRIMARY KEY,
+    name VARCHAR(30),
+    age INT CHECK(age>=18),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+INSERT INTO Voters
+VALUES(101,'Lahari',20,'Guntur');
+INSERT INTO Voters(voterid,name,age)
+VALUES(102,'Anu',22);
+INSERT INTO Voters
+VALUES(101,'Ram',25,'Delhi');
+Error
+Duplicate entry '101'
+Solution
+CREATE TABLE Voters(
+    voterid INT PRIMARY KEY,
+    name VARCHAR(30),
+    age INT CHECK(age>=18),
+    city VARCHAR(30) DEFAULT 'Hyderabad'
+);
+INSERT INTO Voters
+VALUES(101,'Lahari',20,'Guntur');
+INSERT INTO Voters(voterid,name,age)
+VALUES(102,'Anu',22);
+INSERT INTO Voters
+VALUES(103,'Ram',25,'Delhi');
+
+
+
+
+
+
+
+
+
+9. DATA TYPES
+INT
+age INT
+Example
+CREATE TABLE T1(
+    age INT
+);
+
+INSERT INTO T1 VALUES(20);
+
+VARCHAR
+name VARCHAR(30)
+Example
+CREATE TABLE T2(
+    name VARCHAR(30)
+);
+
+INSERT INTO T2 VALUES('Lahari');
+
+CHAR
+gender CHAR(1)
+Example
+CREATE TABLE T3(
+    gender CHAR(1)
+);
+
+INSERT INTO T3 VALUES('F');
+
+
+FLOAT
+salary FLOAT
+Example
+CREATE TABLE T4(
+    salary FLOAT
+);
+INSERT INTO T4 VALUES(25000.75);
+
+DOUBLE
+marks DOUBLE
+Example
+CREATE TABLE T5(
+    marks DOUBLE
+);
+INSERT INTO T5 VALUES(95.50);
+
+DECIMAL
+price DECIMAL(10,2)
+Example
+CREATE TABLE T6(
+    price DECIMAL(10,2)
+);
+INSERT INTO T6 VALUES(999.99);
+
+DATE
+dob DATE
+Example
+CREATE TABLE T7(
+    dob DATE
+);
+
+INSERT INTO T7
+VALUES('2005-07-20');
+
+TIME
+login_time TIME
+Example
+CREATE TABLE T8(
+    login_time TIME
+);
+
+INSERT INTO T8
+VALUES('10:30:00');
+
+DATETIME
+login_date DATETIME
+Example
+CREATE TABLE T9(
+    login_date DATETIME
+);
+
+INSERT INTO T9
+VALUES('2026-07-20 10:30:00');
+
+BOOLEAN
+status BOOLEAN
+Example
+CREATE TABLE T10(
+    status BOOLEAN
+);
+
+INSERT INTO T10
+VALUES(TRUE);
+6. FOREIGN KEY
+Parent Table
+CREATE TABLE Department(
+    deptid INT PRIMARY KEY,
+    deptname VARCHAR(30)
+);
+Child Table
+CREATE TABLE Student(
+    id INT PRIMARY KEY,
+    name VARCHAR(30),
+    deptid INT,
+    FOREIGN KEY(deptid)
+    REFERENCES Department(deptid)
+);
+Insert
+INSERT INTO Department VALUES(1,'CSE');
+
+INSERT INTO Student
+VALUES(101,'Lahari',1);
+Error
+INSERT INTO Student
+VALUES(102,'Anu',5);
+Error
+Cannot add or update child row:
+foreign key constraint fails
+Rectify
+INSERT INTO Department VALUES(5,'ECE');
+
+INSERT INTO Student
+VALUES(102,'Anu',5);
+ 22-07-2026
+-- Create a new database
+CREATE DATABASE ShopDB;
+
+-- Switch to the new database
+USE ShopDB;
+
+-- Customers table
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(50)
+);
+
+-- Orders table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    Product VARCHAR(50),
+    Quantity INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+-- --------------------
+-- INSERT OPERATIONS
+-- --------------------
+
+-- Correct insert
+INSERT INTO Customers (CustomerID, Name, Email)
+VALUES (1, 'Lahari', 'lahari@email.com');
+
+-- Insert with missing Email
+-- This works because Email allows NULL
+INSERT INTO Customers (CustomerID, Name)
+VALUES (2, 'Ravi');
+
+-- Correct order insert
+INSERT INTO Orders (OrderID, CustomerID, Product, Quantity)
+VALUES (101, 1, 'Laptop', 5);
+
+-- Foreign key violation
+-- This will produce an error because CustomerID 99 doesn't exist
+INSERT INTO Orders (OrderID, CustomerID, Product, Quantity)
+VALUES (102, 99, 'Phone', 2);
+
+-- --------------------
+-- CRUD OPERATIONS
+-- --------------------
+
+-- CREATE
+INSERT INTO Customers (CustomerID, Name, Email)
+VALUES (3, 'Anjali', 'anjali@email.com');
+
+-- READ
+SELECT * FROM Customers;
+
+SELECT * FROM Orders
+WHERE CustomerID = 1;
+
+-- UPDATE
+UPDATE Customers
+SET Email = 'lahari_new@email.com'
+WHERE CustomerID = 1;
+
+-- DELETE
+DELETE FROM Customers
+WHERE CustomerID = 3;
+
+-- --------------------
+-- DELETE, TRUNCATE, DROP
+-- --------------------
+
+-- DELETE: Removes selected rows
+DELETE FROM Orders
+WHERE CustomerID = 1;
+
+-- Insert again before TRUNCATE
+INSERT INTO Orders (OrderID, CustomerID, Product, Quantity)
+VALUES (103, 1, 'Mouse', 2);
+
+-- TRUNCATE: Removes all rows
+TRUNCATE TABLE Orders;
+
+-- DROP: Removes the table completely
+DROP TABLE Orders;
+
+-- --------------------
+-- LIMIT and OFFSET
+-- --------------------
+
+-- Show first 2 customers
+SELECT * FROM Customers
+LIMIT 2;
+
+-- Skip first 2 customers and display next 2
+SELECT * FROM Customers
+LIMIT 2 OFFSET 2;
+
+
